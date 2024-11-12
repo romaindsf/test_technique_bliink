@@ -1,3 +1,32 @@
+Test technique Alternant Frontend React chez
+BLIINK
+
+Objectif:
+Développer un site de news simple contenant deux pages principales : une page d’accueil et une
+page article, avec des fonctionnalités pour afficher et filtrer les articles de presse en temps réel.
+Fonctionnalités du Site
+
+1.  Page d’accueil
+    a. Afficher les articles phares du moment avec les informations suivantes : titre,
+    date de publication, et image.
+    b. Utiliser le point d’accès de l’API : https://newsapi.org/v2/top-headlines?country=fr
+    c. Inclure la possibilité de filtrer les articles par catégorie parmi les suivantes :
+    business, entertainment, health, science, sports, technology.
+2.  Page article
+    a. Afficher les détails de l’article sélectionné, incluant le titre, la date de publication,
+    l’image, la description, et le corps de l’article.
+    API
+    ● Inscription nécessaire pour obtenir une clé API via NewsAPI.
+    ● Utiliser cette clé pour récupérer les articles en temps réel.
+    Contraintes Techniques
+    ● Design:Libre, mais l’utilisation de kits CSS comme Bootstrap est interdite.
+    ● Framework: Utilisation d’un framework frontend, avec une préférence pour React.js
+    (Vue.js accepté).
+    ● Typescript : L’utilisation de Typescript est un plus.
+    ● Testsunitaires : L’ajout de tests unitaires (Jest, Cypress, etc.) est un plus.
+    Livrable
+    ● Fournir un repository Git contenant le code du projet
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
