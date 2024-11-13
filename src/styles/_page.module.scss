@@ -1,0 +1,40 @@
+@use '../utils/utils' as *;
+.filterBar {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  button {
+    background-color: #f9f9f9;
+    color: $primaryTextColor;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transition lors des changements d'état */
+    margin: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    &:focus {
+      outline: none;
+      border: 1px solid $primaryTextColor;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+  gap: 25px;
+  padding: 20px;
+}
