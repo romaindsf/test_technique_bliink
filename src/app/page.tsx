@@ -1,31 +1,25 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import callTopHeadlines from '../api/callAPI' // Import de la fonction qui récupère les articles
+import { useEffect } from 'react'
+import { callTopHeadlines } from '../api/callAPI' // Import de la fonction qui récupère les articles
 import ArticleCard from '@/components/articleCard/ArticleCard'
 import FilterButton from '@/components/filterButton/FilterButton'
-import styles from '../styles/_page.module.scss'
-
-// Interface Article
-export interface Article {
-  title: string
-  urlToImage: string
-  publishedAt: string
-  author: string
-  content: string
-  description: string
-  source: {
-    id: string
-    name: string
-  }
-  url: string
-}
+import styles from './_page.module.scss'
+import { useAppContext } from '../context/Context'
+import { handleArticleData } from '@/utils/handleArticleData'
+import { log } from 'console'
 
 export default function Home() {
-  const [articles, setArticles] = useState<Article[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [allCategory, setAllCategory] = useState<Article[]>([])
+  const {
+    displayedArticles,
+    setdisplayedArticles,
+    loading,
+    setLoading,
+    error,
+    setError,
+    savedArticles,
+    setSavedArticles,
+  } = useAppContext()
   const categories: readonly string[] = [
     'Business',
     'Entertainment',
@@ -39,55 +33,64 @@ export default function Home() {
     // Fonction asynchrone pour récupérer les articles
     async function fetchArticles() {
       try {
-        // Appel de la fonction pour récupérer les articles depuis l'API
+        setLoading(true)
         const fetchedArticles = await callTopHeadlines()
-
-        // Filtrer les articles, toutes les conditions doivent être vraies pour que l'article soit conservé
-        const filteredArticles = fetchedArticles.filter(
-          (article: { title: string; content: string; urlToImage: string }) =>
-            article.title &&
-            article.title !== '[Removed]' &&
-            article.content &&
-            article.content !== '[Removed]' &&
-            article.urlToImage !== null
-        )
-
-        // Mise à jour des states
-        setArticles(filteredArticles)
-        setAllCategory(filteredArticles) //pour bouton filtre 'All'
+        // Elimination des articles incomplets ou supprimés
+        const updatedList = handleArticleData(fetchedArticles)
+        // Si le tableau filtré n'est pas vide, on met à jour l'état avec ces articles
+        if (updatedList.length > 0) {
+          setdisplayedArticles(updatedList)
+        } else {
+          setdisplayedArticles([]) // On peut définir un tableau vide si aucun article valide
+        }
+        // Sauvegarde les articles dans propriétés 'all'
+        setSavedArticles((prevState) => ({
+          ...prevState,
+          all: updatedList,
+        }))
+        console.log('au chargement')
       } catch (err) {
-        //gérer les erreurs
+        //gestion des erreurs
         console.error(err)
         setError('Échec de la récupération des articles')
       } finally {
-        setLoading(false) // Une fois les articles récupérés, on met fin au chargement
+        setLoading(false)
       }
     }
 
-    fetchArticles()
-  }, [])
+    // Si les articles n'ont pas été chargés auparavant
+    if (!savedArticles['all']) {
+      fetchArticles() // Lancer la récupération des articles
+    }
+    console.log(savedArticles)
+  }, [
+    savedArticles,
+    setdisplayedArticles,
+    setSavedArticles,
+    setError,
+    setLoading,
+  ])
+
   return (
     <div>
       <main>
         <h1>Actualités</h1>
 
-        {/* les boutons permettant de   filtrer les articles par catégorie*/}
+        {/* les boutons permettant de   filtrer les articles par catégorie */}
         <div className={styles.filterBar}>
-          {/* bouton All, retour aux articles initialement affichés*/}
-          <button onClick={() => setArticles(allCategory)}>All</button>
-          {categories.map(
-            (
-              category //categories est déclaré après  les states
-            ) => (
-              <FilterButton //Boutons généré selon l'array categories
-                key={category}
-                setArticles={setArticles}
-                setError={setError}
-                setLoading={setLoading}
-                category={category}
-              />
-            )
-          )}
+          {/* bouton All, retour aux articles initialement affichés */}
+          <button
+            type='button'
+            onClick={() => setdisplayedArticles(savedArticles['all'])}
+          >
+            All
+          </button>
+          {categories.map((category) => (
+            <FilterButton //Boutons généré selon l'array categories
+              key={category}
+              category={category}
+            />
+          ))}
         </div>
         {
           // Message d'erreur si une erreur s'est produite lors de la récupération des données
@@ -96,18 +99,18 @@ export default function Home() {
 
         {/* Liste des articles */}
         <ul className={styles.grid}>
-          {articles && articles.length > 0
-            ? // Si les articles existent et contient des articles:
-              articles.map((article, index) => (
+          {displayedArticles && displayedArticles.length > 0
+            ? displayedArticles.map((article, index) => (
                 <li key={index}>
                   <ArticleCard
                     urlToImage={article.urlToImage}
                     title={article.title}
                     publishedAt={article.publishedAt}
+                    nameURL={article.nameURL}
                   />
                 </li>
               ))
-            : !loading && ( //Si le chargement est terminé mais que article est vide :
+            : !loading && ( //Si le chargement est terminé mais que displayedArticle est vide :
                 <li>
                   Aucun article n&apos;est actuellement disponible. Veuillez
                   réessayer plus tard.

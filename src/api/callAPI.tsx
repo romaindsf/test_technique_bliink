@@ -1,6 +1,6 @@
 // Fonction asynchrone pour récupérer les titres phares depuis l'API NewsAPI:
 
-export default async function callTopHeadlines() {
+export async function callTopHeadlines() {
   try {
     // Envoi de la requête GET vers l'API pour récupérer les gros titres
     const response = await fetch(

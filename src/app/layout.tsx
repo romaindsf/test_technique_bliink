@@ -1,4 +1,6 @@
 import '../styles/_globals.scss'
+import { AppProvider } from '../context/Context'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -6,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='fr'>
-      <body>{children}</body>
+      <body>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   )
 }

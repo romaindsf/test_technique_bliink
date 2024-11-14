@@ -1,6 +1,6 @@
-@use '../utils/utils' as *;
+@use '../styles/utils' as *;
 .filterBar {
-  width: 50%;
+  width: 70%;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
