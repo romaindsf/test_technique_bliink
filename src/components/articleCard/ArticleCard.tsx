@@ -3,7 +3,7 @@ import Link from 'next/link'
 interface ArticleCardProps {
   urlToImage: string
   title: string
-  publishedAt: string
+  publishedAt: Date
   nameURL: string
 }
 
@@ -20,7 +20,7 @@ export default function ArticleCard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={urlToImage} alt={`image de l'article ${title}`} />
         <div className={styles.articleCard__info}>
-          <p>{publishedAt}</p>
+          {publishedAt && <p>{new Date(publishedAt).toLocaleDateString()}</p>}
           <h2>{title}</h2>
         </div>
       </div>

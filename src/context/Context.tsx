@@ -5,7 +5,7 @@ import React, { useState, createContext, useContext, ReactNode } from 'react'
 export interface Article {
   title: string
   urlToImage: string
-  publishedAt: string
+  publishedAt: Date
   author: string
   content: string
   description: string

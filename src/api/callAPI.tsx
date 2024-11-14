@@ -4,7 +4,7 @@ export async function callTopHeadlines() {
   try {
     // Envoi de la requête GET vers l'API pour récupérer les gros titres
     const response = await fetch(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=76eb36c3d0214c588752b68097e38125'
+      'https://newsapi.org/v2/top-headlines?country=us&apiKey=c5765a965b0d465ca4d532d91a1633bd'
     )
 
     // Vérification du status de la requête
@@ -37,7 +37,7 @@ export async function callSelectedCategory(category: string) {
   try {
     // la requête contient le paramètre category
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=76eb36c3d0214c588752b68097e38125`
+      `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=c5765a965b0d465ca4d532d91a1633bd`
     )
     if (!response.ok) {
       throw new Error(`Erreur : ${response.status} - ${response.statusText}`)

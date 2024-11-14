@@ -20,7 +20,6 @@ export function useArticlesFetcher() {
       // Articles de la catégorie sont-ils déjà en cache ?
       if (savedArticles[category]) {
         setdisplayedArticles(savedArticles[category])
-        console.log(savedArticles[category])
         return
       }
       setLoading(true)
@@ -43,7 +42,6 @@ export function useArticlesFetcher() {
           ...prevState,
           [category]: UpdatedList,
         }))
-        console.log(savedArticles)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         // Gestion des erreurs

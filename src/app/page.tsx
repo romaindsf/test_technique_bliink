@@ -7,7 +7,6 @@ import FilterButton from '@/components/filterButton/FilterButton'
 import styles from './_page.module.scss'
 import { useAppContext } from '../context/Context'
 import { handleArticleData } from '@/utils/handleArticleData'
-import { log } from 'console'
 
 export default function Home() {
   const {
@@ -48,7 +47,6 @@ export default function Home() {
           ...prevState,
           all: updatedList,
         }))
-        console.log('au chargement')
       } catch (err) {
         //gestion des erreurs
         console.error(err)
@@ -62,7 +60,6 @@ export default function Home() {
     if (!savedArticles['all']) {
       fetchArticles() // Lancer la récupération des articles
     }
-    console.log(savedArticles)
   }, [
     savedArticles,
     setdisplayedArticles,

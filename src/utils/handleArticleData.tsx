@@ -15,7 +15,10 @@ export function handleArticleData(articles: Article[]): Article[] {
       // Génère la propriété 'nameURL' en basant sur le titre
       return {
         ...article, // Conserve toutes les propriétés de l'article
-        nameURL: article.title.toLowerCase().replace(/['\s]+/g, '-'), // Ajoute 'nameURL'
+        nameURL: encodeURIComponent(
+          //règle les problèmes d'encodage de l'URL
+          article.title.toLowerCase().replace(/['\s]+/g, '-')
+        ), // Ajoute 'nameURL'
       }
     })
 }
