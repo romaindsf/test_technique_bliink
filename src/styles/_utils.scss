@@ -2,6 +2,9 @@
 $backgroundColor: #faf6ee80;
 $mainContainerBg: #eae4de;
 $primaryTextColor: #4a4a4a;
+$whiteTextColor: #fff;
+$blue: #0073e6;
+$blueHover: #005bb5;
 
 @mixin font-title($size: 2rem, $weight: 700) {
   font-family: 'Merriweather', serif;

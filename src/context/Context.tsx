@@ -17,7 +17,7 @@ export interface Article {
   nameURL: string
 }
 
-// Interface pour le contexte
+// Interface du contexte
 interface AppContextType {
   displayedArticles: Article[]
   setdisplayedArticles: React.Dispatch<React.SetStateAction<Article[]>>
@@ -30,14 +30,11 @@ interface AppContextType {
     React.SetStateAction<{ [key: string]: Article[] }>
   >
 }
-
+// Création du contexte avec une valeur par défaut undefined.
 const AppContext = createContext<AppContextType | undefined>(undefined)
-
-interface AppProviderProps {
-  children: ReactNode
-}
-
-export function AppProvider({ children }: AppProviderProps) {
+// Création du provider qui partage les différents états déclarés
+// Props children représente tout composant React à l'intérieur du provider
+export function AppProvider({ children }: { children: ReactNode }) {
   const [displayedArticles, setdisplayedArticles] = useState<Article[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
@@ -58,7 +55,7 @@ export function AppProvider({ children }: AppProviderProps) {
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
-
+// Hook personnalisé pour accéder au Contexte (useAppContext)
 export function useAppContext(): AppContextType {
   const context = useContext(AppContext)
   if (context === undefined) {

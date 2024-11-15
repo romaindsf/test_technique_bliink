@@ -2,13 +2,11 @@ import React from 'react'
 import styles from './_filterButton.module.scss'
 import { useArticlesFetcher } from '../../hooks/useGetCategory'
 
-interface FilterButtonProps {
-  category: string
-}
-
 export default function FilterButton({
   category,
-}: FilterButtonProps): JSX.Element {
+}: {
+  category: string
+}): JSX.Element {
   const { fetchCategory } = useArticlesFetcher()
 
   return (

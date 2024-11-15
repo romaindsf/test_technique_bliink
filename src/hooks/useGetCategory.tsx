@@ -14,7 +14,7 @@ export function useArticlesFetcher() {
     setSavedArticles,
   } = useAppContext()
 
-  // useCallback pour optimisation des performances
+  // useCallback pour optimiser jes performances (mémorise fonction)
   const fetchCategory = useCallback(
     async (category: string) => {
       // Articles de la catégorie sont-ils déjà en cache ?
@@ -42,10 +42,13 @@ export function useArticlesFetcher() {
           ...prevState,
           [category]: UpdatedList,
         }))
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
+      } catch (error) {
         // Gestion des erreurs
-        setError('Échec de la récupération des articles')
+        const errorMessage =
+          error instanceof Error
+            ? `Échec de la récupération des articles: ${error.message}`
+            : 'Échec de la récupération des articles'
+        setError(errorMessage)
       } finally {
         setLoading(false)
       }

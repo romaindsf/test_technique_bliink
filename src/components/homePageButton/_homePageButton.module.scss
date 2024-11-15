@@ -1,0 +1,16 @@
+@use '../../styles/utils' as *;
+
+.return_link {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 10px 20px;
+  background-color: $blue;
+  color: $whiteTextColor;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  &:hover {
+    background-color: $blueHover;
+  }
+}
