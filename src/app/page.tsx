@@ -3,7 +3,7 @@
 import ArticleCard from '@/components/articleCard/ArticleCard'
 import FilterButton from '@/components/filterButton/FilterButton'
 import styles from './_page.module.scss'
-import { useAppContext } from '../context/Context'
+import { useAppContext } from '@/context/Context'
 import useFetchArticles from '@/hooks/useFetchArticles'
 
 export default function Home() {

@@ -1,5 +1,5 @@
-import '../styles/_globals.scss'
-import { AppProvider } from '../context/Context'
+import '@/styles/_globals.scss'
+import { AppProvider } from '@/context/Context'
 
 export default function RootLayout({
   children,

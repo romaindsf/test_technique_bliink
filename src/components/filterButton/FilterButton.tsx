@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './_filterButton.module.scss'
-import { useArticlesFetcher } from '../../hooks/useGetCategory'
+import { useArticlesFetcher } from '@/hooks/useGetCategory'
 
 export default function FilterButton({
   category,

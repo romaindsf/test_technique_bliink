@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useAppContext } from '@/context/Context'
-import { callSelectedCategory } from '../api/callAPI'
+import { callSelectedCategory } from '@/api/callAPI'
 import { handleArticleData } from '@/utils/handleArticleData'
 
 // Hook personnalisé pour gérer la récupération des articles
