@@ -3,7 +3,7 @@ import Link from 'next/link'
 interface ArticleCardProps {
   urlToImage: string
   title: string
-  publishedAt: Date
+  publishedAt?: Date
   nameURL: string
 }
 
